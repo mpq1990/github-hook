@@ -36,10 +36,7 @@ module.exports = (req, res) => {
       return res.status('401').send('not authorized to use this hook baby');
     }
   } catch (error) {
-    res
-      .status(500)
-      .send(error)
-      .end();
+    return res.status(500).send(error);
   }
 
   const { conclusion } = req.body.check_run;
