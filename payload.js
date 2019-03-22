@@ -3,8 +3,6 @@ const crypto = require('crypto');
 // auth the secret shit
 function validate(req) {
   // make sure we have the token on the env
-  console.log("hey buddy")
-  console.log(process.env.SECRET_TOKEN)
   const secretEnv = process.env.SECRET_TOKEN;
   if (!secretEnv) {
     return {
@@ -36,8 +34,6 @@ function validate(req) {
 }
 
 module.exports = (req, res) => {
-  console.log(req.body)
-  console.log(req.body.raw)
   const validationResult = validate(req);
   if (!validationResult.valid) {
     res
