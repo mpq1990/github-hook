@@ -43,14 +43,14 @@ module.exports = (req, res) => {
   }
 
   const { conclusion } = req.body.check_run;
-  if (!conclusion) {
+  if (conclusion === null) {
     return res.status(304);
   }
   if (conclusion === 'success') {
     localStorage.setItem('success', true);
     console.log('we should re-enable master');
     exec('afplay foghorn-daniel_simon.mp3');
-  } else {
+  } else if (conclusion === 'failure') {
     // pick a pun and say it 🤣
     localStorage.setItem('success', false);
     const pun = puns[Math.floor(Math.random() * puns.length)];
