@@ -39,7 +39,7 @@ module.exports = (req, res) => {
 
   const { conclusion } = req.body.check_run;
   if (!conclusion) {
-    return res.status(500).send({ message: 'we need the status' });
+    return res.status(304);
   }
   if (conclusion === 'success') {
     console.log('we should re-enable master');
