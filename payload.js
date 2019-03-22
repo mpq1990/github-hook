@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const puns = require('./puns');
-const { execSync } = require('child_process');
+const { exec } = require('child_process');
 
 // auth the secret shit
 function validate(req) {
@@ -49,13 +49,14 @@ module.exports = (req, res) => {
   }
   if (conclusion === 'success') {
     console.log('we should re-enable master');
-    execSync('afplay foghorn-daniel_simon.mp3');
+    exec('afplay foghorn-daniel_simon.mp3');
   } else {
     // pick a pun and say it 🤣
     const pun = puns[Math.floor(Math.random() * puns.length)];
-    execSync(`say ${pun}`);
+    exec(`say ${pun}`, () => {
+      exec('afplay submarine-diving-alarm-daniel_simon.mp3');
+    });
     // to arms men ⚠️
-    execSync('afplay submarine-diving-alarm-daniel_simon.mp3');
   }
   res.status(200).send(conclusion);
 };
