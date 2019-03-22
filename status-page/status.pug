@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    style
+      include ./reset.css
+      include ./style.css
+  </head>
+  <body>
+    <div class="container">
+      if status == "true"
+        <h1 class="pass">The build is passing</h1>
+        <img src="https://media.tenor.com/images/546bfbe00a66d47a455bfaf2508bdad8/tenor.gif" />
+      else
+        <h1 class="failed">MASTER IS FROZEN</h1>
+        <img src="http://localhost:3000/cto.gif" />
+    </div>
+  </body>
+  script
+    include ./auto-refresh.js
+</html>

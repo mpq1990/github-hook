@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 
 const payload = require('./payload');
-const status = require('./status');
+const status = require('./status-page/status');
 
 // middleware
 app.use(bodyParser.json());

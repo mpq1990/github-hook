@@ -4,7 +4,7 @@ if (typeof localStorage === 'undefined' || localStorage === null) {
 }
 
 const crypto = require('crypto');
-const puns = require('./puns');
+const puns = require('./utils/puns');
 const { exec } = require('child_process');
 
 // auth the secret shit
