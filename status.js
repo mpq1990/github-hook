@@ -7,7 +7,6 @@ if (typeof localStorage === 'undefined' || localStorage === null) {
 
 module.exports = (req, res) => {
   const compiledFunction = pug.compileFile('status.pug');
-
   res.send(
     compiledFunction({
       status: localStorage.getItem('success')
