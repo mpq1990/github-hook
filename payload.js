@@ -51,11 +51,11 @@ module.exports = (req, res) => {
     console.log('we should re-enable master');
     execSync('afplay foghorn-daniel_simon.mp3');
   } else {
-    console.log('we should put her on freeze!');
-    execSync('afplay submarine-diving-alarm-daniel_simon.mp3');
     // pick a pun and say it 🤣
     const pun = puns[Math.floor(Math.random() * puns.length)];
     execSync(`say ${pun}`);
+    // to arms men ⚠️
+    execSync('afplay submarine-diving-alarm-daniel_simon.mp3');
   }
   res.status(200).send(conclusion);
 };
