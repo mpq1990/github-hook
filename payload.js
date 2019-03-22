@@ -7,18 +7,12 @@ function validate(req) {
   // make sure we have the token on the env
   const secretEnv = process.env.SECRET_TOKEN;
   if (!secretEnv) {
-    return {
-      valid: false,
-      message: 'no secret env var'
-    };
+    throw new Error('no secret var');
   }
   // get the sig from git
   const gitSig = req.get('X-Hub-Signature');
   if (!gitSig) {
-    return {
-      valid: false,
-      message: 'no headers sent from git you fool!'
-    };
+    throw new Error('no headers sent from git you fool!');
   }
 
   // generate a new hash for comparison
@@ -28,24 +22,24 @@ function validate(req) {
     .digest('hex')}`;
 
   // compare with the git one
-  const valid = crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(gitSig));
-  return {
-    valid,
-    message: 'validation result message'
-  };
+  return crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(gitSig));
 }
 
 module.exports = (req, res) => {
-  const validationResult = validate(req);
-  if (!validationResult.valid) {
+  try {
+    if (!validate(req)) {
+      return res.status('401').send('not authorized to use this hook baby');
+    }
+  } catch (error) {
     res
       .status(500)
-      .send(validationResult.message)
+      .send(error)
       .end();
   }
+
   const { conclusion } = req.body.check_run;
   if (!conclusion) {
-    res.status(500).send({ message: 'we need the status' });
+    return res.status(500).send({ message: 'we need the status' });
   }
   if (conclusion === 'success') {
     console.log('we should re-enable master');
@@ -58,5 +52,5 @@ module.exports = (req, res) => {
     });
     // to arms men ⚠️
   }
-  res.status(200).send(conclusion);
+  return res.status(200).send(conclusion);
 };
