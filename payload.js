@@ -41,6 +41,14 @@ module.exports = (req, res) => {
       .send(validationResult.message)
       .end();
   }
-  const readData = JSON.stringify(req.body);
-  res.status(200).send(readData);
+  const { conclusion } = req.body.check_run;
+  if (!conclusion) {
+    res.status(500).send({ message: 'we need the status' });
+  }
+  if (conclusion === 'success') {
+    console.log('we should re-enable master');
+  } else {
+    console.log('we should put her on freeze!');
+  }
+  res.status(200).send(conclusion);
 };
