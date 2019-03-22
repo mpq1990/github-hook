@@ -1,3 +1,8 @@
+if (typeof localStorage === 'undefined' || localStorage === null) {
+  const { LocalStorage } = require('node-localstorage');
+  localStorage = new LocalStorage('./scratch');
+}
+
 const crypto = require('crypto');
 const puns = require('./puns');
 const { exec } = require('child_process');
@@ -42,10 +47,12 @@ module.exports = (req, res) => {
     return res.status(304);
   }
   if (conclusion === 'success') {
+    localStorage.setItem('success', true);
     console.log('we should re-enable master');
     exec('afplay foghorn-daniel_simon.mp3');
   } else {
     // pick a pun and say it 🤣
+    localStorage.setItem('success', false);
     const pun = puns[Math.floor(Math.random() * puns.length)];
     exec(`say ${pun}`, () => {
       exec('afplay submarine-diving-alarm-daniel_simon.mp3');
