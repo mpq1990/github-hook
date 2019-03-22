@@ -1,4 +1,6 @@
 const crypto = require('crypto');
+const puns = require('./puns');
+const { execSync } = require('child_process');
 
 // auth the secret shit
 function validate(req) {
@@ -48,7 +50,9 @@ module.exports = (req, res) => {
   if (conclusion === 'success') {
     console.log('we should re-enable master');
   } else {
-    console.log('we should put her on freeze!');
+    // pick a pun and say it 🤣
+    const pun = puns[Math.floor(Math.random() * puns.length)];
+    execSync(`say ${pun}`);
   }
   res.status(200).send(conclusion);
 };
