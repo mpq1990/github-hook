@@ -1,4 +1,4 @@
-const assert = require('assert');
+var assert = require('assert');
 
 describe('Dummy test', function() {
   it('should pass after a given time 🎉', function(done) {
