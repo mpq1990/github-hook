@@ -9,6 +9,8 @@ const status = require('./status');
 // middleware
 app.use(bodyParser.json());
 
+app.use(express.static('public'));
+
 app.post('/payload', payload);
 
 app.get('/status', status);
