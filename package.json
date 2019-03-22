@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/mpq1990/github-hook/issues"
   },
-  "homepage": "https://github.com/mpq1990/github-hook#readme"
+  "homepage": "https://github.com/mpq1990/github-hook#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
