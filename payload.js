@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const { exec } = require('child_process');
 
 // auth the secret shit
 function validate(req) {
@@ -47,8 +48,10 @@ module.exports = (req, res) => {
   }
   if (conclusion === 'success') {
     console.log('we should re-enable master');
+    execSync('afplay foghorn-daniel_simon.mp3');
   } else {
     console.log('we should put her on freeze!');
+    execSync('afplay submarine-diving-alarm-daniel_simon.mp3');
   }
   res.status(200).send(conclusion);
 };
