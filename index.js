@@ -7,7 +7,7 @@ const payload = require('./payload');
 const status = require('./status-page/status');
 
 // start the slack bot
-const { startBot } = require('./slackbot');
+const { startBot, freeze } = require('./slackbot');
 
 // start the slack bot and make an instance of it
 startBot();

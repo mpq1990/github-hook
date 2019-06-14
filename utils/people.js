@@ -1,1 +1,1 @@
-module.exports = ['@maj', '@GsusWalks', '@Jules'];
+module.exports = ['@mΛj', '@GsusWalks', '@Jules'];

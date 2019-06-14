@@ -6,7 +6,8 @@ const defaultParams = {
   as_user: false
 };
 
-exports.botInstance = null;
+let instance = null;
+exports.botInstance = instance;
 
 exports.startBot = function start() {
   // create a bot
@@ -16,16 +17,17 @@ exports.startBot = function start() {
   });
 
   // assign it so we can use it later
-  exports.botInstance = bot;
+  instance = bot;
+  exports.botInstance = instance;
 };
 
 exports.freeze = function freeze() {
-  if (!botInstance) {
+  if (!instance) {
     console.error('no bot instance so am returning');
     return;
   }
 
-  botInstance.postMessageToChannel(
+  instance.postMessageToChannel(
     channel,
     `:red_circle::red_circle::red_circle::red_circle: MASTER IS FROZEN :red_circle::red_circle::red_circle::red_circle:, please investigate: ${getNextPerson()}`,
     {
@@ -50,17 +52,17 @@ function getNextPerson() {
       ? people[currentIndex + 1]
       : people[0];
   }
-  localStorage.setItem('personToFix', person);
+  localStorage.setItem('personToFix', personToFix);
   return personToFix;
 }
 
 exports.unfreeze = function unfreeze() {
-  if (!botInstance) {
+  if (!instance) {
     console.error('no bot instance so am returning');
     return;
   }
   // define channel, where bot exist. You can adjust it there https://my.slack.com/services
-  botInstance.postMessageToChannel(
+  instance.postMessageToChannel(
     channel,
     ':white_check_mark::white_check_mark::white_check_mark::white_check_mark: MASTER IS GREEN :white_check_mark::white_check_mark::white_check_mark::white_check_mark:',
     {
