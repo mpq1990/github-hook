@@ -1,2 +1,9 @@
 // Member ID's for the users in slack
-module.exports = ['<@UKK4PKLD6>', '<@UKM8T3JTY>', '<@UKCPK18BB>'];
+module.exports = [
+  // majid
+  '<@U1RRP67GW>',
+  // juliana
+  '<@UHPNYLRED>',
+  // Gsus
+  '<@U0BL6PYHL>'
+];

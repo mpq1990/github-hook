@@ -1,8 +1,8 @@
 const SlackBot = require('slackbots');
 const people = require('./utils/people');
 
-const channel = 'the_one_who_listens';
-const channelId = 'CKM8WGVPY';
+const channel = 'dev_status';
+const channelId = 'C70DUQZ0Q';
 const defaultParams = {
   as_user: false
 };
