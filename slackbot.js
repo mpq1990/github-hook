@@ -2,6 +2,7 @@ const SlackBot = require('slackbots');
 const people = require('./utils/people');
 
 const channel = 'the_one_who_listens';
+const channelId = 'CKM8WGVPY';
 const defaultParams = {
   as_user: false
 };
@@ -21,21 +22,34 @@ exports.startBot = function start() {
   exports.botInstance = instance;
 };
 
+const setTopic = function(topic) {
+  const params = {
+    token: process.env.SLACK_TOKEN,
+    name: 'hades',
+    topic,
+    channel: channelId
+  };
+
+  instance._api('channels.setTopic', params);
+};
+
+exports.setTopic = setTopic;
+
 exports.freeze = function freeze() {
   if (!instance) {
     console.error('no bot instance so am returning');
     return;
   }
 
-  instance.postMessageToChannel(
-    channel,
-    `:red_circle::red_circle::red_circle::red_circle: MASTER IS FROZEN :red_circle::red_circle::red_circle::red_circle:, please investigate: ${getNextPerson()}`,
-    {
-      username: 'hades',
-      icon_emoji: ':smiling_imp:',
-      ...defaultParams
-    }
-  );
+  const message = `:red_circle::red_circle::red_circle::red_circle: MASTER IS FROZEN :red_circle::red_circle::red_circle::red_circle:, please investigate: ${getNextPerson()}`;
+
+  instance.postMessageToChannel(channel, message, {
+    username: 'hades',
+    icon_emoji: ':smiling_imp:',
+    ...defaultParams
+  });
+
+  setTopic(message);
 };
 
 function getNextPerson() {
