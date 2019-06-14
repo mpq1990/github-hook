@@ -6,6 +6,7 @@ if (typeof localStorage === 'undefined' || localStorage === null) {
 const crypto = require('crypto');
 const puns = require('./utils/puns');
 const { exec } = require('child_process');
+const { freeze, unfreeze } = require('slackbots');
 
 // auth the secret shit
 function validate(req) {
@@ -47,6 +48,7 @@ module.exports = (req, res) => {
     localStorage.setItem('success', true);
     console.log('we should re-enable master');
     exec('afplay foghorn-daniel_simon.mp3');
+    unfreeze();
   } else if (conclusion === 'failure') {
     // pick a pun and say it 🤣
     localStorage.setItem('success', false);
@@ -55,6 +57,8 @@ module.exports = (req, res) => {
       exec('afplay submarine-diving-alarm-daniel_simon.mp3');
     });
     // to arms men ⚠️
+    freeze();
   }
+
   return res.status(200).send(conclusion);
 };

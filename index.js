@@ -6,6 +6,15 @@ const port = 3000;
 const payload = require('./payload');
 const status = require('./status-page/status');
 
+// start the slack bot
+const SlackBot = require('slackbots');
+
+// create a bot
+const bot = new SlackBot({
+  token: 'xoxb-653738538546-665213955296-rTMP2vgCKYIfiukErBrQMPtS', // Add a bot https://my.slack.com/services/new/bot and put the token
+  name: 'hades'
+});
+
 // middleware
 app.use(bodyParser.json());
 
@@ -15,4 +24,8 @@ app.post('/payload', payload);
 
 app.get('/status', status);
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+bot.on('start', function() {
+  console.log('the bot has started!');
+  global.bot = bot;
+  app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+});
