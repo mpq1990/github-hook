@@ -1,8 +1,11 @@
+const SlackBot = require('slackbots');
+const people = require('./utils/people');
+
 const channel = 'the_one_who_listens';
 const defaultParams = {
   as_user: false
 };
-const SlackBot = require('slackbots');
+
 exports.botInstance = null;
 
 exports.startBot = function start() {
@@ -24,7 +27,7 @@ exports.freeze = function freeze() {
 
   botInstance.postMessageToChannel(
     channel,
-    ':red_circle::red_circle::red_circle::red_circle: MASTER IS FROZEN :red_circle::red_circle::red_circle::red_circle:',
+    `:red_circle::red_circle::red_circle::red_circle: MASTER IS FROZEN :red_circle::red_circle::red_circle::red_circle:, please investigate: ${getNextPerson()}`,
     {
       username: 'hades',
       icon_emoji: ':smiling_imp:',
@@ -32,6 +35,24 @@ exports.freeze = function freeze() {
     }
   );
 };
+
+function getNextPerson() {
+  // pick the next person to look into why it is broken
+  // set that person in the local storage
+  const lastPerson = localStorage.getItem('personToFix');
+  let personToFix;
+
+  if (!lastPerson) {
+    personToFix = people[0];
+  } else {
+    const currentIndex = people.indexOf(lastPerson);
+    personToFix = people[currentIndex + 1]
+      ? people[currentIndex + 1]
+      : people[0];
+  }
+  localStorage.setItem('personToFix', person);
+  return personToFix;
+}
 
 exports.unfreeze = function unfreeze() {
   if (!botInstance) {
