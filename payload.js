@@ -6,7 +6,7 @@ if (typeof localStorage === 'undefined' || localStorage === null) {
 const crypto = require('crypto');
 const puns = require('./utils/puns');
 const { exec } = require('child_process');
-const { freeze, unfreeze } = require('slackbots');
+const { freeze, unfreeze } = require('./slackbot');
 
 // auth the secret shit
 function validate(req) {

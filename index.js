@@ -25,7 +25,6 @@ app.post('/payload', payload);
 app.get('/status', status);
 
 bot.on('start', function() {
-  console.log('the bot has started!');
   global.bot = bot;
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 });
