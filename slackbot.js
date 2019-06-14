@@ -11,7 +11,7 @@ exports.botInstance = null;
 exports.startBot = function start() {
   // create a bot
   const bot = new SlackBot({
-    token: 'xoxb-653738538546-665213955296-rTMP2vgCKYIfiukErBrQMPtS', // Add a bot https://my.slack.com/services/new/bot and put the token
+    token: process.env.SLACK_TOKEN,
     name: 'hades'
   });
 
