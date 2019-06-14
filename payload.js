@@ -44,6 +44,14 @@ module.exports = (req, res) => {
   if (conclusion === null) {
     return res.status(304);
   }
+
+  // if it is unchanged then we do not need to do anything we should have already
+  // updated the status
+  const currentState = localStorage.getItem('success');
+  if (currentState && currentState === conclusion) {
+    return res.status(304);
+  }
+
   if (conclusion === 'success') {
     localStorage.setItem('success', true);
     console.log('we should re-enable master');
