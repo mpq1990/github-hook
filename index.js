@@ -7,13 +7,12 @@ const payload = require('./payload');
 const status = require('./status-page/status');
 
 // start the slack bot
-const SlackBot = require('slackbots');
+const { startBot } = require('./slackbot');
 
-// create a bot
-const bot = new SlackBot({
-  token: 'xoxb-653738538546-665213955296-rTMP2vgCKYIfiukErBrQMPtS', // Add a bot https://my.slack.com/services/new/bot and put the token
-  name: 'hades'
-});
+// start the slack bot and make an instance of it
+startBot();
+
+const { botInstance } = require('./slackbot');
 
 // middleware
 app.use(bodyParser.json());
@@ -24,7 +23,6 @@ app.post('/payload', payload);
 
 app.get('/status', status);
 
-bot.on('start', function() {
-  global.bot = bot;
+botInstance.on('start', function() {
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 });
