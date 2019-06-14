@@ -1,7 +1,7 @@
 const SlackBot = require('slackbots');
 const people = require('./utils/people');
 
-const channel = 'dev_status';
+const channel = 'dev-status';
 const channelId = 'C70DUQZ0Q';
 const defaultParams = {
   as_user: false
@@ -41,7 +41,7 @@ exports.freeze = function freeze() {
     return;
   }
 
-  const message = `:red_circle::red_circle::red_circle::red_circle: MASTER IS FROZEN :red_circle::red_circle::red_circle::red_circle:, please investigate: ${getNextPerson()}`;
+  const message = `:circle-fail::circle-fail::circle-fail::circle-fail: MASTER IS FROZEN :circle-fail::circle-fail::circle-fail::circle-fail:, please investigate: ${getNextPerson()}`;
 
   instance.postMessageToChannel(channel, message, {
     username: 'hades',
@@ -77,7 +77,7 @@ exports.unfreeze = function unfreeze() {
   }
 
   const message =
-    ':white_check_mark::white_check_mark::white_check_mark::white_check_mark: MASTER IS GREEN :white_check_mark::white_check_mark::white_check_mark::white_check_mark:';
+    ':circle-pass::circle-pass::circle-pass::circle-pass: MASTER IS GREEN :circle-pass::circle-pass::circle-pass::circle-pass:';
 
   // define channel, where bot exist. You can adjust it there https://my.slack.com/services
   instance.postMessageToChannel(channel, message, {
