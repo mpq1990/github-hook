@@ -40,7 +40,7 @@ module.exports = (req, res) => {
     return res.status(500).send(error);
   }
 
-  const { head_branch } = req.body.check_run.check_suit;
+  const { head_branch } = req.body.check_run.check_suite;
 
   if (head_branch !== 'master') {
     return res.status(304);
