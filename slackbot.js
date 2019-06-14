@@ -75,14 +75,16 @@ exports.unfreeze = function unfreeze() {
     console.error('no bot instance so am returning');
     return;
   }
+
+  const message =
+    ':white_check_mark::white_check_mark::white_check_mark::white_check_mark: MASTER IS GREEN :white_check_mark::white_check_mark::white_check_mark::white_check_mark:';
+
   // define channel, where bot exist. You can adjust it there https://my.slack.com/services
-  instance.postMessageToChannel(
-    channel,
-    ':white_check_mark::white_check_mark::white_check_mark::white_check_mark: MASTER IS GREEN :white_check_mark::white_check_mark::white_check_mark::white_check_mark:',
-    {
-      username: 'zeus',
-      icon_emoji: ':zap:',
-      ...defaultParams
-    }
-  );
+  instance.postMessageToChannel(channel, message, {
+    username: 'zeus',
+    icon_emoji: ':zap:',
+    ...defaultParams
+  });
+
+  setTopic(message);
 };
